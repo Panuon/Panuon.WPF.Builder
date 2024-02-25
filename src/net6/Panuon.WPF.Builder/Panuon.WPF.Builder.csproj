@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+	<UseWPF>true</UseWPF>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<WarningLevel>5</WarningLevel>
+		<OutputPath>..\..\outputs\Debug\net6\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>..\..\outputs\Release\net6\</OutputPath>
+	</PropertyGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Panuon.WPF" Version="1.0.4" />
+  </ItemGroup>
+
+  <Import Project="..\..\shared\Panuon.WPF.Builder\Panuon.WPF.Builder.projitems" Label="Shared" />
+
+</Project>

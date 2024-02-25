@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ec386397-3a5a-4743-b5b4-89c348b16bc6</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Panuon.WPF.Builder</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Compositions\AppBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IBorderElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IPasswordBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IToggleButtonElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ITextBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IStackPanelElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ILabelElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IContentControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ISelectorElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ITabControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IAppBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ITextBlockElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IButtonElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IGridElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IListBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IItemsControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IModule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IPanelElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IDecoratorElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IContainerElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IWindowElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ListBoxExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\PasswordBoxExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ToggleButtonExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ElementExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StackPanelExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\LabelExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ControlExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TabControlExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ModuleExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\PanelExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBlockExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ButtonExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\GridExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ItemsControlExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CarouselPanelExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\WindowExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\PasswordBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ToggleButtonElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ContentControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\TextBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\StackPanelElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\GridElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ItemsControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\LabelElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\SelectorElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\TabControlElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Module.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\PanelElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\TextBlockElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ButtonElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Element.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ListBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ItemsPanelTemplateGeneratorControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TextElements\DocumentTextElement.cs" />
+    <Compile Include="..\..\shared\Panuon.WPF.Builder\Models\Elements\DecoratorElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\View.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\BorderElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\WindowElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Observer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TemplateGeneratorControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ParameterUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Enums\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Events\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,52 @@
+﻿using Panuon.WPF.Builder.Elements;
+using Panuon.WPF.Builder.Utils;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+namespace Panuon.WPF.Builder
+{
+    public static class ButtonExtension
+    {
+        public static IButtonElement CreateButton(this IAppBuilder appBuilder,
+            object content = null,
+            object style = null,
+            object visibility = null,
+            object width = null, object height = null,
+            object minWidth = null, object minHeight = null,
+            object maxWidth = null, object maxHeight = null,
+            object margin = null, object padding = null,
+            object horizontal = null, object vertical = null,
+            object contentHorizontal = null, object contentVertical = null,
+            object fontSize = null, object fontFamily = null, object fontWeight = null, object fontStyle = null, object fontStretch = null)
+        {
+            var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
+                appBuilder,
+                content,
+                style,
+                visibility,
+                width, height,
+                minWidth, minHeight,
+                maxWidth, maxHeight,
+                margin, padding,
+                horizontal, vertical,
+                contentHorizontal, contentVertical,
+                fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
+
+            return new ButtonElement(config);
+        }
+
+        public static IButtonElement OnClick(this IButtonElement element,
+            RoutedEventHandler handler)
+        {
+            return element.AddHandle(Button.ClickEvent, handler);
+        }
+
+        public static IButtonElement OnDoubleClick(this IButtonElement element,
+            MouseButtonEventHandler handler)
+        {
+            return element.AddHandle(Button.MouseDoubleClickEvent, handler);
+        }
+    }
+}

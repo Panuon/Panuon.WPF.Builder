@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.34601.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples.csproj", "{895D7E4A-7836-4371-BBEB-DD12D384E9E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net472", "net472", "{64517A2C-A2A7-46FF-9AE6-F63A6BF1AEC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panuon.WPF.Builder", "..\src\net472\Panuon.WPF.Builder\Panuon.WPF.Builder.csproj", "{7E3803E2-8677-4433-B987-0D79929ED614}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{07D2AFA2-F8DC-4A65-862F-AA48D505717D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Panuon.WPF.Builder", "..\src\shared\Panuon.WPF.Builder\Panuon.WPF.Builder.shproj", "{EC386397-3A5A-4743-B5B4-89C348B16BC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{895D7E4A-7836-4371-BBEB-DD12D384E9E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895D7E4A-7836-4371-BBEB-DD12D384E9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895D7E4A-7836-4371-BBEB-DD12D384E9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895D7E4A-7836-4371-BBEB-DD12D384E9E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E3803E2-8677-4433-B987-0D79929ED614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E3803E2-8677-4433-B987-0D79929ED614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E3803E2-8677-4433-B987-0D79929ED614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E3803E2-8677-4433-B987-0D79929ED614}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7E3803E2-8677-4433-B987-0D79929ED614} = {64517A2C-A2A7-46FF-9AE6-F63A6BF1AEC0}
+		{EC386397-3A5A-4743-B5B4-89C348B16BC6} = {07D2AFA2-F8DC-4A65-862F-AA48D505717D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83E8AF0C-1221-40BD-B882-63FED15DC4CC}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\src\shared\Panuon.WPF.Builder\Panuon.WPF.Builder.projitems*{7e3803e2-8677-4433-b987-0d79929ed614}*SharedItemsImports = 4
+		..\src\shared\Panuon.WPF.Builder\Panuon.WPF.Builder.projitems*{ec386397-3a5a-4743-b5b4-89c348b16bc6}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal
