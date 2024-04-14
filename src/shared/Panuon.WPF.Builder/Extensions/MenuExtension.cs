@@ -4,16 +4,14 @@ using System.Reflection;
 
 namespace Panuon.WPF.Builder
 {
-    public static class ListBoxExtension
+    public static class MenuExtension
     {
-        public static IListBoxElement CreateListBox(this IAppBuilder appBuilder,
+        public static IMenuElement CreateMenu(this IAppBuilder appBuilder,
             object style = null,
-            object itemsSource = null,
             object itemTemplate = null,
             object itemsPanel = null,
             object selectedIndex = null,
-            object selectedItem = null,
-            object selectedValue = null,
+            object itemsSource = null,
             string displayMemberPath = null,
             string selectedValuePath = null,
             object visibility = null,
@@ -28,12 +26,10 @@ namespace Panuon.WPF.Builder
             var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
                 appBuilder,
                 style,
-                itemsSource,
                 itemTemplate,
                 itemsPanel,
                 selectedIndex,
-                selectedItem,
-                selectedValue,
+                itemsSource,
                 displayMemberPath,
                 selectedValuePath,
                 visibility,
@@ -45,7 +41,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new ListBoxElement(config);
+            return new MenuElement(config);
         }
     }
 }

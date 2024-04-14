@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
@@ -34,12 +35,6 @@ namespace Panuon.WPF.Builder.Elements
             }
 
             return base.SetPropertyValue(propertyKey, value);
-        }
-
-        public IToggleButtonElement OnClick(Delegate handler)
-        {
-            AddRoutedEventHandler(ToggleButton.ClickEvent, handler);
-            return this;
         }
         #endregion
     }

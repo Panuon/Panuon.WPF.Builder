@@ -8,7 +8,8 @@ namespace Panuon.WPF.Builder.Models
     internal abstract class DocumentTextElement
         : Element
     {
-        protected DocumentTextElement(IDictionary<string, object> config) : base(config)
+        protected DocumentTextElement(IDictionary<string, object> config) 
+            : base(config)
         {
         }
 

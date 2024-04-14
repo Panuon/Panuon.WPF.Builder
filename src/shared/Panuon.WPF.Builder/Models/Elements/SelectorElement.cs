@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+
 namespace Panuon.WPF.Builder
 {
     internal abstract class SelectorElement
@@ -28,6 +29,12 @@ namespace Panuon.WPF.Builder
             get => (int)GetValue(Selector.SelectedIndexProperty);
             set => SetValue(Selector.SelectedIndexProperty, value);
         }
+
+        public object SelectedValue
+        {
+            get => GetValue(Selector.SelectedValueProperty);
+            set => SetValue(Selector.SelectedValueProperty, value);
+        }
         #endregion
 
         #region Methods
@@ -51,6 +58,9 @@ namespace Panuon.WPF.Builder
                     return true;
                 case "selecteditem":
                     SetValue(Selector.SelectedItemProperty, value);
+                    return true;
+                case "selectedvalue":
+                    SetValue(Selector.SelectedValueProperty, value);
                     return true;
             }
 

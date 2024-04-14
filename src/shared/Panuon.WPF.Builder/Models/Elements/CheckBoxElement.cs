@@ -4,21 +4,21 @@ using System.Windows.Controls;
 
 namespace Panuon.WPF.Builder.Elements
 {
-    internal class BorderElement
-        : DecoratorElement, IBorderElement
+    internal class CheckBoxElement
+        : ToggleButtonElement, ICheckBoxElement
     {
         #region Ctor
-        internal BorderElement(IDictionary<string, object> config)
+        internal CheckBoxElement(IDictionary<string, object> config)
             : base(config)
         {
         }
         #endregion
 
         #region Properties
-        public override Type VisualType => typeof(Border);
+        public override Type VisualType => typeof(CheckBox);
         #endregion
 
-        #region Overrides
+        #region Methods
         #endregion
     }
 }

@@ -17,9 +17,10 @@ namespace Panuon.WPF.Builder.Elements
         #region Properties
         public object Text
         {
-            get => (Visual as TextBox).Text;
+            get => GetValue(TextBox.TextProperty);
             set => SetValue(TextBox.TextProperty, value);
         }
+
         public override Type VisualType => typeof(TextBox);
         #endregion
 

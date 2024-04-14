@@ -2,14 +2,14 @@
 using Panuon.WPF.Builder.Utils;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls.Primitives;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Panuon.WPF.Builder
 {
-    public static class ToggleButtonExtension
+    public static class CheckBoxExtension
     {
-        public static IToggleButtonElement CreateToggleButton(this IAppBuilder appBuilder,
+        public static ICheckBoxElement CreateCheckBox(this IAppBuilder appBuilder,
             object content = null,
             object isChecked = null,
             object style = null,
@@ -36,46 +36,54 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new ToggleButtonElement(config);
+            return new CheckBoxElement(config);
         }
 
 
-        public static IToggleButtonElement OnClick(this IToggleButtonElement element,
+        public static ICheckBoxElement OnClick(this ICheckBoxElement element,
             RoutedEventHandler handler)
         {
-            return element.AddHandle(ToggleButton.ClickEvent, handler);
+            return element.AddHandle(CheckBox.ClickEvent, handler);
         }
 
-        public static IToggleButtonElement OnChecked(this IToggleButtonElement element,
-            RoutedEventHandler handler)
-        {
-            return element.AddHandle(ToggleButton.CheckedEvent, handler);
-        }
-
-        public static IToggleButtonElement OnUnchecked(this IToggleButtonElement element,
-            RoutedEventHandler handler)
-        {
-            return element.AddHandle(ToggleButton.UncheckedEvent, handler);
-        }
-
-        public static IToggleButtonElement OnIndeterminate(this IToggleButtonElement element,
+        public static ICheckBoxElement OnCheckChanged(this ICheckBoxElement element,
            RoutedEventHandler handler)
         {
-            return element.AddHandle(ToggleButton.IndeterminateEvent, handler);
+            element.AddHandle(CheckBox.CheckedEvent, handler);
+            element.AddHandle(CheckBox.UncheckedEvent, handler);
+            return element.AddHandle(CheckBox.IndeterminateEvent, handler);
         }
 
-        public static IToggleButtonElement OnIsCheckedChanged(this IToggleButtonElement element,
+        public static ICheckBoxElement OnChecked(this ICheckBoxElement element,
             RoutedEventHandler handler)
         {
-            element.AddHandle(ToggleButton.CheckedEvent, handler);
-            element.AddHandle(ToggleButton.IndeterminateEvent, handler);
-            return element.AddHandle(ToggleButton.UncheckedEvent, handler);
+            return element.AddHandle(CheckBox.CheckedEvent, handler);
         }
 
-        public static IToggleButtonElement OnDoubleClick(this IToggleButtonElement element,
+        public static ICheckBoxElement OnUnchecked(this ICheckBoxElement element,
+            RoutedEventHandler handler)
+        {
+            return element.AddHandle(CheckBox.UncheckedEvent, handler);
+        }
+
+        public static ICheckBoxElement OnIndeterminate(this ICheckBoxElement element,
+           RoutedEventHandler handler)
+        {
+            return element.AddHandle(CheckBox.IndeterminateEvent, handler);
+        }
+
+        public static ICheckBoxElement OnIsCheckedChanged(this ICheckBoxElement element,
+            RoutedEventHandler handler)
+        {
+            element.AddHandle(CheckBox.CheckedEvent, handler);
+            element.AddHandle(CheckBox.IndeterminateEvent, handler);
+            return element.AddHandle(CheckBox.UncheckedEvent, handler);
+        }
+
+        public static ICheckBoxElement OnDoubleClick(this ICheckBoxElement element,
             MouseButtonEventHandler handler)
         {
-            return element.AddHandle(ToggleButton.MouseDoubleClickEvent, handler);
+            return element.AddHandle(CheckBox.MouseDoubleClickEvent, handler);
         }
     }
 }

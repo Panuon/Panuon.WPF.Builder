@@ -22,15 +22,36 @@ namespace Panuon.WPF.Builder.Elements
         #region Methods
         protected override FrameworkElement OnCreatingActualVisual(FrameworkElement element)
         {
-            return new Border()
+            var canHorizontalScroll = GetConfig("canHorizontalScroll") as bool?;
+            var canVerticalScroll = GetConfig("canVerticalScroll") as bool?;
+
+            if (canHorizontalScroll == true || canVerticalScroll == true)
             {
-                Child = element,
-            };
+                var scrollViewer = new ScrollViewer()
+                {
+                    HorizontalScrollBarVisibility = canHorizontalScroll == true ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled,
+                    VerticalScrollBarVisibility = canVerticalScroll == true ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled,
+                    Content = element,
+                };
+                return scrollViewer;
+            }
+            return base.OnCreatingActualVisual(element);
         }
         #endregion
 
         #region Overrides
-        
+        protected override bool SetPropertyValue(string propertyKey,
+            object value)
+        {
+            switch (propertyKey)
+            {
+                case "orientation":
+                    SetValue(StackPanel.OrientationProperty, value);
+                    return true;
+            }
+
+            return base.SetPropertyValue(propertyKey, value);
+        }
         #endregion
 
         #region Functions

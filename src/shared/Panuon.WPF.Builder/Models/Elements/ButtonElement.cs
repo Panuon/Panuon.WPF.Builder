@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Panuon.WPF.Builder.Elements
@@ -19,7 +20,7 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Methods
-        public IButtonElement OnClick(Delegate handler)
+        public IButtonElement OnClick(RoutedEventHandler handler)
         {
             AddRoutedEventHandler(Button.ClickEvent, handler);
             return this;

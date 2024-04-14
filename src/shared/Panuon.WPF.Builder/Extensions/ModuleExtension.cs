@@ -25,9 +25,48 @@ namespace Panuon.WPF.Builder
             return module;
         }
 
+        public static TModule SetWidth<TModule>(this TModule module,
+            object width)
+            where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.WidthProperty, width);
+            return module;
+        }
+
+        public static TModule SetHeight<TModule>(this TModule module,
+           object height)
+           where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.HeightProperty, height);
+            return module;
+        }
+
+        public static TModule SetMargin<TModule>(this TModule module,
+            object margin)
+            where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.MarginProperty, margin);
+            return module;
+        }
+
+        public static TModule SetHorizontal<TModule>(this TModule module,
+            object horizontal)
+            where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, horizontal);
+            return module;
+        }
+
+        public static TModule SetVertical<TModule>(this TModule module,
+            object vertical)
+            where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, vertical);
+            return module;
+        }
 
         public static TModule SetGridRow<TModule>(this TModule module,
-            int row)
+            object row)
             where TModule : IModule
         {
             GridElement.SetRow(module, row);
@@ -35,7 +74,7 @@ namespace Panuon.WPF.Builder
         }
 
         public static TModule SetGridRowSpan<TModule>(this TModule module,
-            int rowSpan)
+            object rowSpan)
             where TModule : IModule
         {
             GridElement.SetRowSpan(module, rowSpan);
@@ -43,7 +82,7 @@ namespace Panuon.WPF.Builder
         }
 
         public static TModule SetGridColumn<TModule>(this TModule module,
-            int column)
+            object column)
             where TModule : IModule
         {
             GridElement.SetColumn(module, column);
@@ -51,7 +90,7 @@ namespace Panuon.WPF.Builder
         }
 
         public static TModule SetGridColumnSpan<TModule>(this TModule module,
-            int columnSpan)
+            object columnSpan)
             where TModule : IModule
         {
             GridElement.SetColumnSpan(module, columnSpan);

@@ -1,40 +1,37 @@
 ﻿using Panuon.WPF.Builder.Elements;
 using Panuon.WPF.Builder.Utils;
 using System.Reflection;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Panuon.WPF.Builder
 {
-    public static class ButtonExtension
+    public static class PathExtension
     {
-        public static IButtonElement CreateButton(this IAppBuilder appBuilder,
-            object content = null,
+        public static IPathElement CreatePath(this IAppBuilder appBuilder,
+            object data = null,
             object style = null,
             object visibility = null,
             object width = null, object height = null,
             object minWidth = null, object minHeight = null,
             object maxWidth = null, object maxHeight = null,
-            object margin = null, object padding = null,
+            object margin = null,
             object horizontal = null, object vertical = null,
-            object contentHorizontal = null, object contentVertical = null,
-            object fontSize = null, object fontFamily = null, object fontWeight = null, object fontStyle = null, object fontStretch = null)
+            object fill = null,
+            object stroke = null, object strokeThickness = null, object strokeDashArray = null, object strokeDashCap = null, object strokeDashOffset = null)
         {
             var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
                 appBuilder,
-                content,
+                data,
                 style,
                 visibility,
                 width, height,
                 minWidth, minHeight,
                 maxWidth, maxHeight,
-                margin, padding,
+                margin,
                 horizontal, vertical,
-                contentHorizontal, contentVertical,
-                fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
+                fill,
+                stroke, strokeThickness, strokeDashArray, strokeDashCap, strokeDashOffset);
 
-            return new ButtonElement(config);
+            return new PathElement(config);
         }
     }
 }

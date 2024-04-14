@@ -10,6 +10,8 @@ namespace Panuon.WPF.Builder
 
         int SelectedIndex { get; set; }
 
+        object SelectedValue { get; set; }
+
 
         ISelectorElement OnSelectionChanged(SelectionChangedEventHandler handler);
     }

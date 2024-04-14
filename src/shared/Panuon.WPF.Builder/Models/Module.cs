@@ -64,6 +64,8 @@ namespace Panuon.WPF.Builder
             }
         }
         private FrameworkElement _rootVisual;
+
+        public Window ParentWindow => Window.GetWindow(ActualVisual);
         #endregion
 
         #region Methods
@@ -91,11 +93,7 @@ namespace Panuon.WPF.Builder
         #region GetValue
         public object GetValue(DependencyProperty property)
         {
-            if(_visual != null)
-            {
-                return _visual.GetValue(property);
-            }
-            return null;
+            return Visual.GetValue(property);
         }
         #endregion
 
@@ -226,7 +224,7 @@ namespace Panuon.WPF.Builder
             {
                 finalValue = GetCornerRadiusValue(value);
             }
-            else if(type == typeof(GridLength)
+            else if (type == typeof(GridLength)
                 || type == typeof(GridLength?))
             {
                 finalValue = GetGridLengthValue(value);
@@ -267,9 +265,13 @@ namespace Panuon.WPF.Builder
             {
                 finalValue = GetDataTemplateValue(value);
             }
-            else if(type == typeof(ItemsPanelTemplate))
+            else if (type == typeof(ItemsPanelTemplate))
             {
                 finalValue = GetItemsPanelTemplateValue(value);
+            }
+            else if (type == typeof(Geometry))
+            {
+                finalValue = GetGeometryValue(value);
             }
             else if (type == typeof(object))
             {
@@ -657,19 +659,23 @@ namespace Panuon.WPF.Builder
             }
             else if (value is string stringValue)
             {
+                string uriString = null;
                 if (Uri.IsWellFormedUriString(stringValue, UriKind.Absolute))
                 {
-                    return Fonts.GetFontFamilies(new Uri(stringValue, UriKind.RelativeOrAbsolute)).FirstOrDefault();
+                    uriString = stringValue;
                 }
-                else if (stringValue.StartsWith("/")
-                    && stringValue.Contains(";component/"))
+                else if((stringValue.StartsWith("/")
+                        && stringValue.Contains(";component/"))
+                    || (System.IO.Path.IsPathRooted(stringValue)
+                        && stringValue.IndexOfAny(System.IO.Path.GetInvalidPathChars()) == -1))
                 {
-                    return Fonts.GetFontFamilies(new Uri("pack://application:,,," + stringValue, UriKind.RelativeOrAbsolute)).FirstOrDefault();
+                    uriString = "pack://application:,,," + stringValue;
                 }
-                else if (System.IO.Path.IsPathRooted(stringValue)
-                    && stringValue.IndexOfAny(System.IO.Path.GetInvalidPathChars()) == -1)
+                if (!string.IsNullOrEmpty(uriString))
                 {
-                    return Fonts.GetFontFamilies(new Uri(stringValue, UriKind.RelativeOrAbsolute)).FirstOrDefault();
+                    int lastIndex = uriString.LastIndexOf('/');
+                    return new FontFamily(new Uri(uriString.Substring(0, lastIndex + 1)),
+                        $"./{uriString.Substring(lastIndex + 1)}");
                 }
                 return Visual.FindResource(stringValue);
             }
@@ -991,6 +997,36 @@ namespace Panuon.WPF.Builder
 
 
             throw new Exception($"Can not convert '{value}' to type '{typeof(Style)}'.");
+        }
+
+        private object GetGeometryValue(object value)
+        {
+            if (value is null)
+            {
+                return null;
+            }
+            else if (value is Geometry geometry)
+            {
+                return geometry;
+            }
+            else if (value is string stringValue)
+            {
+                try
+                {
+                    return Geometry.Parse(stringValue);
+                }
+                catch { }
+
+                return Visual.FindResource(value);
+            }
+            else if (value is Observer observer)
+            {
+                return GetBinding(observer);
+            }
+            else
+            {
+                return Visual.FindResource(value);
+            }
         }
 
         private object GetItemsPanelTemplateValue(object value)

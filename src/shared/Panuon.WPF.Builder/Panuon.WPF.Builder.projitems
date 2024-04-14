@@ -11,7 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Compositions\AppBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IBorderElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IRadioButtonElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IMenuElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IPasswordBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IShapeElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)contracts\elements\IPathElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ICheckBoxElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IToggleButtonElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ITextBoxElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IStackPanelElement.cs" />
@@ -33,8 +38,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IContainerElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\IView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IWindowElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\RadioButtonExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ListBoxExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\MenuExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\PasswordBoxExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\PathExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CheckBoxExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ToggleButtonExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxExtension.cs" />
@@ -50,7 +59,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ItemsControlExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\CarouselPanelExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\WindowExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\RadioButtonElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ShapeElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\MenuElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\PasswordBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)models\elements\PathElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\CheckBoxElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ToggleButtonElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ContentControlElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ControlElement.cs" />

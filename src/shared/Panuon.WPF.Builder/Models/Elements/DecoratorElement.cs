@@ -8,7 +8,7 @@ namespace Panuon.WPF.Builder.Elements
         : Element, IDecoratorElement
     {
         #region Ctor
-        internal DecoratorElement(Dictionary<string, object> config)
+        internal DecoratorElement(IDictionary<string, object> config)
             : base(config)
         {
         }

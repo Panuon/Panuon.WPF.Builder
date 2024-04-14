@@ -98,11 +98,6 @@ namespace Panuon.WPF.Builder.Elements
 
             return base.SetPropertyValue(propertyKey, value);
         }
-
-        protected override void OnInitializing()
-        {
-            base.OnInitializing();
-        }
         #endregion
     }
 }

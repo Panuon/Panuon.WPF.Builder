@@ -2,14 +2,14 @@
 using Panuon.WPF.Builder.Utils;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls.Primitives;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Panuon.WPF.Builder
 {
-    public static class ToggleButtonExtension
+    public static class RadioButtonExtension
     {
-        public static IToggleButtonElement CreateToggleButton(this IAppBuilder appBuilder,
+        public static IRadioButtonElement CreateRadioButton(this IAppBuilder appBuilder,
             object content = null,
             object isChecked = null,
             object style = null,
@@ -36,46 +36,54 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new ToggleButtonElement(config);
+            return new RadioButtonElement(config);
         }
 
 
-        public static IToggleButtonElement OnClick(this IToggleButtonElement element,
+        public static IRadioButtonElement OnClick(this IRadioButtonElement element,
             RoutedEventHandler handler)
         {
-            return element.AddHandle(ToggleButton.ClickEvent, handler);
+            return element.AddHandle(RadioButton.ClickEvent, handler);
         }
 
-        public static IToggleButtonElement OnChecked(this IToggleButtonElement element,
-            RoutedEventHandler handler)
-        {
-            return element.AddHandle(ToggleButton.CheckedEvent, handler);
-        }
-
-        public static IToggleButtonElement OnUnchecked(this IToggleButtonElement element,
-            RoutedEventHandler handler)
-        {
-            return element.AddHandle(ToggleButton.UncheckedEvent, handler);
-        }
-
-        public static IToggleButtonElement OnIndeterminate(this IToggleButtonElement element,
+        public static IRadioButtonElement OnCheckChanged(this IRadioButtonElement element,
            RoutedEventHandler handler)
         {
-            return element.AddHandle(ToggleButton.IndeterminateEvent, handler);
+            element.AddHandle(RadioButton.CheckedEvent, handler);
+            element.AddHandle(RadioButton.UncheckedEvent, handler);
+            return element.AddHandle(RadioButton.IndeterminateEvent, handler);
         }
 
-        public static IToggleButtonElement OnIsCheckedChanged(this IToggleButtonElement element,
+        public static IRadioButtonElement OnChecked(this IRadioButtonElement element,
             RoutedEventHandler handler)
         {
-            element.AddHandle(ToggleButton.CheckedEvent, handler);
-            element.AddHandle(ToggleButton.IndeterminateEvent, handler);
-            return element.AddHandle(ToggleButton.UncheckedEvent, handler);
+            return element.AddHandle(RadioButton.CheckedEvent, handler);
         }
 
-        public static IToggleButtonElement OnDoubleClick(this IToggleButtonElement element,
+        public static IRadioButtonElement OnUnchecked(this IRadioButtonElement element,
+            RoutedEventHandler handler)
+        {
+            return element.AddHandle(RadioButton.UncheckedEvent, handler);
+        }
+
+        public static IRadioButtonElement OnIndeterminate(this IRadioButtonElement element,
+           RoutedEventHandler handler)
+        {
+            return element.AddHandle(RadioButton.IndeterminateEvent, handler);
+        }
+
+        public static IRadioButtonElement OnIsCheckedChanged(this IRadioButtonElement element,
+            RoutedEventHandler handler)
+        {
+            element.AddHandle(RadioButton.CheckedEvent, handler);
+            element.AddHandle(RadioButton.IndeterminateEvent, handler);
+            return element.AddHandle(RadioButton.UncheckedEvent, handler);
+        }
+
+        public static IRadioButtonElement OnDoubleClick(this IRadioButtonElement element,
             MouseButtonEventHandler handler)
         {
-            return element.AddHandle(ToggleButton.MouseDoubleClickEvent, handler);
+            return element.AddHandle(RadioButton.MouseDoubleClickEvent, handler);
         }
     }
 }

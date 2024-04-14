@@ -75,6 +75,9 @@ namespace Panuon.WPF.Builder
                 case "visibility":
                     SetValue(FrameworkElement.VisibilityProperty, value, true);
                     return true;
+                case "isenabled":
+                    SetValue(FrameworkElement.IsEnabledProperty, value, true);
+                    return true;
                 case "width":
                     SetValue(FrameworkElement.WidthProperty, value, true);
                     return true;
@@ -154,6 +157,15 @@ namespace Panuon.WPF.Builder
                 }
             }
         }
+
+        protected object GetConfig(string key)
+        {
+            if (_config.ContainsKey(key))
+            {
+                return _config[key];
+            }
+            return null;
+        }
         #endregion
 
         #region Functions
@@ -164,16 +176,9 @@ namespace Panuon.WPF.Builder
 
             if (eventHandlerType != handlerType)
             {
-                try
-                {
-                    var newHandler = Delegate.CreateDelegate(eventHandlerType, handler.Target, handler.Method);
-                    _createdHandlers.Add(handler, newHandler);
-                    return newHandler;
-                }
-                catch
-                {
-
-                }
+                var newHandler = Delegate.CreateDelegate(eventHandlerType, handler.Target, handler.Method);
+                _createdHandlers.Add(handler, newHandler);
+                return newHandler;
             }
 
             return handler;

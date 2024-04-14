@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 
 namespace Panuon.WPF.Builder
 {
@@ -20,6 +21,8 @@ namespace Panuon.WPF.Builder
             }
         }
         private IElement _rootElement;
+
+        public Dispatcher UIDispatcher => ActualVisual.Dispatcher;
         #endregion
 
         #region Methods

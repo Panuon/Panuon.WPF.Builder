@@ -1,7 +1,9 @@
 ﻿using Panuon.WPF.Builder.Elements;
+using Panuon.WPF.Builder.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
 
@@ -140,7 +142,9 @@ namespace Panuon.WPF.Builder
 
         public ObservableCollectionX<T> ObserveCollection<T>(IEnumerable<T> items)
         {
-            return new ObservableCollectionX<T>(items);
+            return items == null 
+                ? new ObservableCollectionX<T>()
+                : new ObservableCollectionX<T>(items);
         }
         #endregion
 
@@ -195,8 +199,15 @@ namespace Panuon.WPF.Builder
         #endregion
 
         #region Show
-        public void Show<TView>(TView view = default,
-            object owner = null)
+        public virtual void Show<TView>(TView view = default,
+            object owner = null,
+            Type type = null,
+            object title = null,
+            object icon = null,
+            object style = null,
+            object width = null,
+            object height = null,
+            object location = null)
             where TView : IView
         {
             var targetView = view == null
@@ -204,39 +215,110 @@ namespace Panuon.WPF.Builder
                 : view;
             if (targetView.RootElement is WindowElement windowElement)
             {
-                windowElement.SetOwner(owner);
+                if (owner != null)
+                {
+                    windowElement.SetOwner(owner);
+                }
+                if (title != null)
+                {
+                    windowElement.Set(Window.TitleProperty, title);
+                }
+                if (icon != null)
+                {
+                    windowElement.Set(Window.IconProperty, icon);
+                }
+                if (style != null)
+                {
+                    windowElement.Set(Window.StyleProperty, style);
+                }
+                if (width != null)
+                {
+                    windowElement.Set(Window.WidthProperty, width);
+                }
+                if (height != null)
+                {
+                    windowElement.Set(Window.HeightProperty, height);
+                }
+                if (location != null)
+                {
+                    windowElement.Set(nameof(WindowStartupLocation), location);
+                }
                 windowElement.Show();
             }
             else
             {
-                windowElement = new WindowElement(null, new Dictionary<string, object>()
-                {
-                    { "content", targetView },
-                    { "owner", owner },
-                });
+                var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
+                    view,
+                    owner, type,
+                    title, icon,
+                    style,
+                    width, height,
+                    location
+                    );
+
+                windowElement = new WindowElement(null, config);
                 windowElement.Show();
             }
         }
 
-        public bool? ShowDialog<TView>(TView view = default,
-            object owner = null)
+        public virtual bool? ShowDialog<TView>(TView view = default,
+            object owner = null,
+            Type type = null,
+            object title = null,
+            object icon = null,
+            object style = null,
+            object width = null,
+            object height = null,
+            object location = null)
             where TView : IView
         {
             var targetView = view == null
                 ? (TView)Activator.CreateInstance(typeof(TView))
                 : view;
-            if(targetView.RootElement is WindowElement windowElement)
+
+            if (targetView.RootElement is WindowElement windowElement)
             {
-                windowElement.SetOwner(owner);
+                if (owner != null)
+                {
+                    windowElement.SetOwner(owner);
+                }
+                if (title != null)
+                {
+                    windowElement.Set(Window.TitleProperty, title);
+                }
+                if (icon != null)
+                {
+                    windowElement.Set(Window.IconProperty, icon);
+                }
+                if (style != null)
+                {
+                    windowElement.Set(Window.StyleProperty, style);
+                }
+                if (width != null)
+                {
+                    windowElement.Set(Window.WidthProperty, width);
+                }
+                if (height != null)
+                {
+                    windowElement.Set(Window.HeightProperty, height);
+                }
+                if (location != null)
+                {
+                    windowElement.Set(nameof(WindowStartupLocation), location);
+                }
                 return windowElement.ShowDialog();
             }
             else
             {
-                windowElement = new WindowElement(null, new Dictionary<string, object>()
-                {
-                    { "content", targetView },
-                    { "owner", owner },
-                });
+                var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
+                    view,
+                    owner, type,
+                    title, icon,
+                    style,
+                    width, height,
+                    location
+                    );
+                windowElement = new WindowElement(null, config);
                 return windowElement.ShowDialog();
             }
         }

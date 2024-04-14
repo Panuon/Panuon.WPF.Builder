@@ -18,6 +18,12 @@ namespace Panuon.WPF.Builder.Elements
 
         #region Properties
         public override Type VisualType => typeof(TextBlock);
+
+        public string Text
+        {
+            get => GetValue(TextBlock.TextProperty) as string;
+            set => SetValue(TextBlock.TextProperty, value);
+        }
         #endregion
 
         #region Methods

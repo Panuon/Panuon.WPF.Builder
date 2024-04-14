@@ -63,11 +63,25 @@ namespace Panuon.WPF.Builder
 
         #region Show Window
         void Show<TView>(TView view = default,
-            object owner = null)
+            object owner = null,
+            Type type = null,
+            object title = null,
+            object icon = null,
+            object style = null,
+            object width = null,
+            object height = null,
+            object location = null)
             where TView : IView;
 
         bool? ShowDialog<TView>(TView view = default,
-            object owner = null)
+            object owner = null,
+            Type type = null,
+            object title = null,
+            object icon = null,
+            object style = null,
+            object width = null,
+            object height = null,
+            object location = null)
             where TView : IView;
         #endregion
     }

@@ -24,6 +24,14 @@ namespace Panuon.WPF.Builder
             return element;
         }
 
+        public static TElement OnLoaded<TElement>(this TElement element,
+           RoutedEventHandler handler)
+           where TElement : IElement
+        {
+            element.AddRoutedEventHandler(FrameworkElement.LoadedEvent, handler);
+            return element;
+        }
+
         public static TElement OnPreviewDragEnter<TElement>(this TElement element,
            DragEventHandler handler)
            where TElement : IElement

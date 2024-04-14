@@ -20,48 +20,48 @@ namespace Panuon.WPF.Builder.Elements
         public override Type VisualType => typeof(Grid);
 
         #region Row
-        public static int GetRow(IModule module)
+        public static object GetRow(IModule module)
         {
-            return (int)module.GetValue(Grid.RowProperty);
+            return (object)module.GetValue(Grid.RowProperty);
         }
 
-        public static void SetRow(IModule module, int value)
+        public static void SetRow(IModule module, object value)
         {
             module.SetValue(Grid.RowProperty, value, true);
         }
         #endregion
 
         #region RowSpan
-        public static int GetRowSpan(IModule module)
+        public static object GetRowSpan(IModule module)
         {
-            return (int)module.GetValue(Grid.RowSpanProperty);
+            return (object)module.GetValue(Grid.RowSpanProperty);
         }
 
-        public static void SetRowSpan(IModule module, int value)
+        public static void SetRowSpan(IModule module, object value)
         {
             module.SetValue(Grid.RowSpanProperty, value, true);
         }
         #endregion
 
         #region Column
-        public static int GetColumn(IModule module)
+        public static object GetColumn(IModule module)
         {
-            return (int)module.GetValue(Grid.ColumnProperty);
+            return (object)module.GetValue(Grid.ColumnProperty);
         }
 
-        public static void SetColumn(IModule module, int value)
+        public static void SetColumn(IModule module, object value)
         {
             module.SetValue(Grid.ColumnProperty, value, true);
         }
         #endregion
 
         #region ColumnSpan
-        public static int GetColumnSpan(IModule module)
+        public static object GetColumnSpan(IModule module)
         {
-            return (int)module.GetValue(Grid.ColumnSpanProperty);
+            return (object)module.GetValue(Grid.ColumnSpanProperty);
         }
 
-        public static void SetColumnSpan(IModule module, int value)
+        public static void SetColumnSpan(IModule module, object value)
         {
             module.SetValue(Grid.ColumnSpanProperty, value, true);
         }

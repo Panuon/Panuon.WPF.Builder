@@ -10,31 +10,26 @@ namespace Panuon.WPF.Builder
         #region Methods
         public static IStackPanelElement CreateStackPanel(this IAppBuilder appBuilder,
             IEnumerable<IModule> children,
-            IEnumerable<object> rows = null,
-            IEnumerable<object> columns = null,
-            bool autoAllocate = true,
-            object width = null,
-            object height = null,
-            object horizontal = null,
-            object vertical = null,
-            object background = null,
-            object borderBrush = null,
-            object borderThickness = null,
-            object margin = null,
-            object padding = null,
-            object horizontalSeparatorBrush = null,
-            object verticalSeparatorBrush = null)
+            object orientation = null,
+            bool canHorizontalScroll = false, bool canVerticalScroll = false,
+            object visibility = null, object isEnabled = null,
+            object width = null, object height = null,
+            object minWidth = null, object minHeight = null,
+            object maxWidth = null, object maxHeight = null,
+            object margin = null, object padding = null,
+            object horizontal = null, object vertical = null)
         {
             var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
                 appBuilder,
                 children,
-                rows, columns,
-                autoAllocate,
+                orientation,
+                canHorizontalScroll, canVerticalScroll,
+                visibility, isEnabled,
                 width, height,
-                vertical, horizontal,
-                background, borderBrush, borderThickness, 
+                minWidth, minHeight,
+                maxWidth, maxHeight,
                 margin, padding,
-                horizontalSeparatorBrush, verticalSeparatorBrush);
+                horizontal, vertical);
 
             return new StackPanelElement(config);
         }
