@@ -1,9 +1,6 @@
 ﻿using Panuon.WPF.Builder.Elements;
 using Panuon.WPF.Builder.Utils;
 using System.Reflection;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Panuon.WPF.Builder
 {
@@ -34,7 +31,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new ButtonElement(config);
+            return new ButtonElement(appBuilder, config);
         }
     }
 }

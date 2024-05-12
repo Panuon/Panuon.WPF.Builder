@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Panuon.WPF.Builder.Elements
@@ -9,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : PanelElement, IStackPanelElement
     {
         #region Ctor
-        internal StackPanelElement(IDictionary<string, object> config)
-            : base(config)
+        internal StackPanelElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -20,37 +19,20 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Methods
-        protected override FrameworkElement OnCreatingActualVisual(FrameworkElement element)
-        {
-            var canHorizontalScroll = GetConfig("canHorizontalScroll") as bool?;
-            var canVerticalScroll = GetConfig("canVerticalScroll") as bool?;
-
-            if (canHorizontalScroll == true || canVerticalScroll == true)
-            {
-                var scrollViewer = new ScrollViewer()
-                {
-                    HorizontalScrollBarVisibility = canHorizontalScroll == true ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled,
-                    VerticalScrollBarVisibility = canVerticalScroll == true ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled,
-                    Content = element,
-                };
-                return scrollViewer;
-            }
-            return base.OnCreatingActualVisual(element);
-        }
         #endregion
 
         #region Overrides
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "orientation":
                     SetValue(StackPanel.OrientationProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
 

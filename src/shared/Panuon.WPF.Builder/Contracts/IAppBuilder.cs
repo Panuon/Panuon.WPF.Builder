@@ -42,23 +42,27 @@ namespace Panuon.WPF.Builder
         #endregion
 
         #region CreateBinding
-        Binding CreateBinding(string path
-            , string stringFormat = null
-            , IValueConverter converter = null);
 
-        Binding CreateBinding(DependencyProperty property
-            , object source
-            , string stringFormat = null
-            , IValueConverter converter = null
-            , BindingMode mode = BindingMode.Default
-            , UpdateSourceTrigger trigger = UpdateSourceTrigger.Default);
+        Binding CreateBinding(string path,
+            string stringFormat = null,
+            IValueConverter converter = null,
+            Func<object, object> converteFunc = null);
 
-        Binding CreateBinding(DependencyProperty property
-            , RelativeSource relativeSource
-            , string stringFormat = null
-            , IValueConverter converter = null
-            , BindingMode mode = BindingMode.Default
-            , UpdateSourceTrigger trigger = UpdateSourceTrigger.Default);
+        Binding CreateBinding(DependencyProperty property,
+            object source,
+            string stringFormat = null,
+            IValueConverter converter = null,
+            Func<object, object> converteFunc = null,
+            BindingMode mode = BindingMode.Default,
+            UpdateSourceTrigger trigger = UpdateSourceTrigger.Default);
+
+        Binding CreateBinding(DependencyProperty property,
+            RelativeSource relativeSource,
+            string stringFormat = null,
+            IValueConverter converter = null,
+            Func<object, object> converteFunc = null,
+            BindingMode mode = BindingMode.Default,
+            UpdateSourceTrigger trigger = UpdateSourceTrigger.Default);
         #endregion
 
         #region Show Window
@@ -83,6 +87,10 @@ namespace Panuon.WPF.Builder
             object height = null,
             object location = null)
             where TView : IView;
+        #endregion
+
+        #region FindResource
+        object FindResource(object key);
         #endregion
     }
 }

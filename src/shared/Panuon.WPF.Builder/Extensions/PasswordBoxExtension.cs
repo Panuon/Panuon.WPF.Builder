@@ -35,7 +35,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new PasswordBoxElement(config);
+            return new PasswordBoxElement(appBuilder, config);
         }
 
         public static IPasswordBoxElement OnPasswordChanged(this IPasswordBoxElement element,

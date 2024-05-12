@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Panuon.WPF.Builder
@@ -6,6 +7,14 @@ namespace Panuon.WPF.Builder
     public abstract class View
         : Module, IView
     {
+        #region Ctor
+        public View()
+            : base(null)
+        {
+
+        }
+        #endregion
+
         #region Properties
         public IElement RootElement 
         {
@@ -22,7 +31,11 @@ namespace Panuon.WPF.Builder
         }
         private IElement _rootElement;
 
-        public Dispatcher UIDispatcher => ActualVisual.Dispatcher;
+        public Dispatcher UIDispatcher => Visual.Dispatcher;
+
+        public override FrameworkElementFactory VisualFactory => RootElement.VisualFactory;
+
+        public override Type VisualType => RootElement?.VisualType;
         #endregion
 
         #region Methods
@@ -37,7 +50,7 @@ namespace Panuon.WPF.Builder
 
         public void Close(bool? dialogResult = null)
         {
-            var window = Window.GetWindow(ActualVisual);
+            var window = Window.GetWindow(Visual);
             if(dialogResult == null)
             {
                 window.Close();
@@ -70,7 +83,7 @@ namespace Panuon.WPF.Builder
         #region Internal Methods
         protected override FrameworkElement OnCreatingVisual()
         {
-            return RootElement.ActualVisual;
+            return RootElement.Visual;
         }
         #endregion
     }

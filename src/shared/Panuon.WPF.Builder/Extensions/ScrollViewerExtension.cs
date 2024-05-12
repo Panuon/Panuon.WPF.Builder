@@ -4,34 +4,34 @@ using System.Reflection;
 
 namespace Panuon.WPF.Builder
 {
-    public static class PathExtension
+    public static class ScrollViewerExtension
     {
-        public static IPathElement CreatePath(this IAppBuilder appBuilder,
-            object data = null,
+        public static IScrollViewerElement CreateScrollViewer(this IAppBuilder appBuilder,
+            object content = null,
             object style = null,
             object visibility = null,
             object width = null, object height = null,
             object minWidth = null, object minHeight = null,
             object maxWidth = null, object maxHeight = null,
-            object margin = null,
+            object margin = null, object padding = null,
             object horizontal = null, object vertical = null,
-            object fill = null,
-            object stroke = null, object strokeThickness = null, object strokeDashArray = null, object strokeDashCap = null, object strokeDashOffset = null)
+            object contentHorizontal = null, object contentVertical = null,
+            object fontSize = null, object fontFamily = null, object fontWeight = null, object fontStyle = null, object fontStretch = null)
         {
             var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
                 appBuilder,
-                data,
+                content,
                 style,
                 visibility,
                 width, height,
                 minWidth, minHeight,
                 maxWidth, maxHeight,
-                margin,
+                margin, padding,
                 horizontal, vertical,
-                fill,
-                stroke, strokeThickness, strokeDashArray, strokeDashCap, strokeDashOffset);
+                contentHorizontal, contentVertical,
+                fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new PathElement(appBuilder, config);
+            return new ScrollViewerElement(appBuilder, config);
         }
     }
 }

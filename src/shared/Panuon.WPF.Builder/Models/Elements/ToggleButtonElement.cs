@@ -10,8 +10,8 @@ namespace Panuon.WPF.Builder.Elements
         : ContentControlElement, IToggleButtonElement
     {
         #region Ctor
-        internal ToggleButtonElement(IDictionary<string, object> config)
-            : base(config)
+        internal ToggleButtonElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -21,20 +21,20 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Methods
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "ischecked":
                     SetValue(ToggleButton.IsCheckedProperty, value);
-                    return true;
+                    break;
                 case "text":
                     SetValue(TextBox.TextProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
     }

@@ -1,17 +1,21 @@
-﻿using Panuon.WPF.Builder.Utils;
+﻿using Panuon.WPF.Builder.Elements;
+using Panuon.WPF.Builder.Utils;
 using System.Reflection;
 
 namespace Panuon.WPF.Builder
 {
-    public static class TabControlExtension
+    public static class ComboBoxExtension
     {
-        public static ITabControlElement CreateTabControl(this IAppBuilder appBuilder,
+        public static IComboBoxElement CreateComboBox(this IAppBuilder appBuilder,
+            object style = null,
             object itemsSource = null,
+            object itemTemplate = null,
+            object itemsPanel = null,
             object selectedIndex = null,
-            IPanelElement panel = null,
+            object selectedItem = null,
+            object selectedValue = null,
             string displayMemberPath = null,
             string selectedValuePath = null,
-            object style = null,
             object visibility = null,
             object width = null, object height = null,
             object minWidth = null, object minHeight = null,
@@ -23,10 +27,15 @@ namespace Panuon.WPF.Builder
         {
             var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
                 appBuilder,
-                itemsSource, selectedIndex,
-                panel,
-                displayMemberPath, selectedValuePath,
                 style,
+                itemsSource,
+                itemTemplate,
+                itemsPanel,
+                selectedIndex,
+                selectedItem,
+                selectedValue,
+                displayMemberPath,
+                selectedValuePath,
                 visibility,
                 width, height,
                 minWidth, minHeight,
@@ -36,9 +45,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new TabControlElement(appBuilder, config);
+            return new ComboBoxElement(appBuilder, config);
         }
-
-
     }
 }

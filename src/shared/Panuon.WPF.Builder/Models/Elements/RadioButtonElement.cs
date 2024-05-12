@@ -8,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : ToggleButtonElement, IRadioButtonElement
     {
         #region Ctor
-        internal RadioButtonElement(IDictionary<string, object> config)
-            : base(config)
+        internal RadioButtonElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion

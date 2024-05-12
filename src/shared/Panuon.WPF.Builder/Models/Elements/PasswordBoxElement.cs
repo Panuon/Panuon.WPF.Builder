@@ -9,8 +9,8 @@ namespace Panuon.WPF.Builder.Elements
         : ContentControlElement, IPasswordBoxElement
     {
         #region Ctor
-        internal PasswordBoxElement(IDictionary<string, object> config)
-            : base(config)
+        internal PasswordBoxElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -49,17 +49,17 @@ namespace Panuon.WPF.Builder.Elements
             return passwordBox;
         }
 
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "password":
                     SetValue(InternalPasswordProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
 

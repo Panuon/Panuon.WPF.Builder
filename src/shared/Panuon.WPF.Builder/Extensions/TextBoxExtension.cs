@@ -34,7 +34,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new TextBoxElement(config);
+            return new TextBoxElement(appBuilder, config);
         }
 
         public static ITextBoxElement OnTextChanged(this ITextBoxElement element,

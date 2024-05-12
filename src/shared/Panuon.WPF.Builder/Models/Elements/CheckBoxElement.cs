@@ -8,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : ToggleButtonElement, ICheckBoxElement
     {
         #region Ctor
-        internal CheckBoxElement(IDictionary<string, object> config)
-            : base(config)
+        internal CheckBoxElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion

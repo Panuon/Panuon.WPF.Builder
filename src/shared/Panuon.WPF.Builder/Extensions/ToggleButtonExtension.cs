@@ -36,7 +36,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new ToggleButtonElement(config);
+            return new ToggleButtonElement(appBuilder, config);
         }
 
 

@@ -1,6 +1,8 @@
 ﻿using Panuon.WPF.Builder.Models;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -10,8 +12,8 @@ namespace Panuon.WPF.Builder.Elements
         : DocumentTextElement, ITextBlockElement
     {
         #region Ctor
-        internal TextBlockElement(IDictionary<string, object> config)
-            : base(config)
+        internal TextBlockElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -27,21 +29,26 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Methods
-        public ITextBlockElement CustomStyle(object foreground = null)
-        {
-            if (foreground != null)
-            {
-                SetValue(TextBlock.ForegroundProperty, foreground);
-            }
-
-            return this;
-        }
-
         public ITextBlockElement AddRun(object text = null,
+            object toolTip = null,
             object foreground = null)
         {
-            var run = new Run();
+            var runFactory = new FrameworkElementFactory(typeof(Run));
+            if (text != null)
+            {
+                SetFactoryValue(runFactory, Run.TextProperty, text);
+            }
+            if (foreground != null)
+            {
+                SetFactoryValue(runFactory, Run.ForegroundProperty, foreground);
+            }
+            if (toolTip != null)
+            {
+                SetFactoryValue(runFactory, Run.ToolTipProperty, toolTip);
+            }
+            _visualBuilder.AddChild(runFactory);
 
+            var run = new Run();
             if (text != null)
             {
                 SetValue(run, Run.TextProperty, text);
@@ -50,43 +57,47 @@ namespace Panuon.WPF.Builder.Elements
             {
                 SetValue(run, Run.ForegroundProperty, foreground);
             }
+            if (toolTip != null)
+            {
+                SetValue(run, Run.ToolTipProperty, toolTip);
+            }
 
-            var textBlock = ActualVisual as TextBlock;
+            var textBlock = Visual as TextBlock;
             textBlock.Inlines.Add(run);
 
             return this;
         }
 
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        override public void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "text":
                     SetValue(TextBlock.TextProperty, value);
-                    return true;
+                    break;
                 case "foreground":
                     SetValue(TextBlock.ForegroundProperty, value);
-                    return true;
+                    break;
                 case "fontsize":
                     SetValue(TextBlock.FontSizeProperty, value);
-                    return true;
+                    break;
                 case "fontfamily":
                     SetValue(TextBlock.FontFamilyProperty, value);
-                    return true;
+                    break;
                 case "fontstyle":
                     SetValue(TextBlock.FontStyleProperty, value);
-                    return true;
+                    break;
                 case "fontweight":
                     SetValue(TextBlock.FontWeightProperty, value);
-                    return true;
+                    break;
                 case "fontstretch":
                     SetValue(TextBlock.FontStretchProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
-        }
+        }   
         #endregion
 
         #region Functions

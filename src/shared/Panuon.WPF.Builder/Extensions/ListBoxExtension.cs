@@ -45,7 +45,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new ListBoxElement(config);
+            return new ListBoxElement(appBuilder, config);
         }
     }
 }

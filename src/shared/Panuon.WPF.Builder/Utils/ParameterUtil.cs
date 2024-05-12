@@ -15,7 +15,7 @@ namespace Panuon.WPF.Builder.Utils
             for (int i = 1; i < paramInfos.Length; i++)
             {
                 var paramInfo = paramInfos[i];
-                dictionary.Add(paramInfos[i].Name, parameters[i]);
+                dictionary.Add(paramInfo.Name, parameters[i]);
             }
             return dictionary;
         }

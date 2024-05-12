@@ -7,8 +7,8 @@ namespace Panuon.WPF.Builder.Elements
         : Element, IShapeElement
     {
         #region Ctor
-        internal ShapeElement(IDictionary<string, object> config)
-            : base(config)
+        internal ShapeElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -17,32 +17,32 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Methods
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "fill":
                     SetValue(Shape.FillProperty, value);
-                    return true;
+                    break;
                 case "stroke":
                     SetValue(Shape.StrokeProperty, value);
-                    return true;
+                    break;
                 case "strokethickness":
                     SetValue(Shape.StrokeThicknessProperty, value);
-                    return true;
+                    break;
                 case "strokedasharray":
                     SetValue(Shape.StrokeDashArrayProperty, value);
-                    return true;
+                    break;
                 case "strokedashcap":
                     SetValue(Shape.StrokeDashCapProperty, value);
-                    return true;
+                    break;
                 case "strokedashoffset":
                     SetValue(Shape.StrokeDashOffsetProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
     }

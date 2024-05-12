@@ -11,8 +11,8 @@ namespace Panuon.WPF.Builder
         #endregion
 
         #region Ctor
-        internal ItemsControlElement(IDictionary<string, object> config)
-            : base(config)
+        internal ItemsControlElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -22,26 +22,26 @@ namespace Panuon.WPF.Builder
         #endregion
 
         #region Methods
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "itemssource":
                     SetValue(ItemsControl.ItemsSourceProperty, value);
-                    return true;
+                    break;
                 case "itemtemplate":
                     SetValue(ItemsControl.ItemTemplateProperty, value);
-                    return true;
+                    break;
                 case "itemspanel":
                     SetValue(ItemsControl.ItemsPanelProperty, value);
-                    return true;
+                    break;
                 case "displaymemberpath":
                     SetValue(ItemsControl.DisplayMemberPathProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
     }

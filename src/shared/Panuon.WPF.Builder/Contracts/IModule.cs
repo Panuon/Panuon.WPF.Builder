@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace Panuon.WPF.Builder
 {
@@ -9,21 +10,19 @@ namespace Panuon.WPF.Builder
         /// </summary>
         FrameworkElement Visual { get; }
                                                     
-        /// <summary>
-        /// Returns the ui element actually added to the view tree.
-        /// If <see cref="Visual"/> has a parent element, the top-most parent element will be returned. Otherwise, <see cref="Visual"/> will be returned.
-        /// </summary>
-        FrameworkElement ActualVisual { get; }
+        FrameworkElementFactory VisualFactory { get; }
+
+        Type VisualType { get; }
+
+        IAppBuilder AppBuilder { get; }
 
         void Initialize();
 
         void SetValue(string propertyKeyOrName,
-            object value,
-            bool updateActualVisual = false);
+            object value);
 
         void SetValue(DependencyProperty property,
-            object value,
-            bool updateActualVisual = false);
+            object value);
 
         object GetValue(string propertyName);
 

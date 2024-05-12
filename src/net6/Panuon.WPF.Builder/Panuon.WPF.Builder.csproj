@@ -19,6 +19,8 @@
 
   <Import Project="..\..\shared\Panuon.WPF.Builder\Panuon.WPF.Builder.projitems" Label="Shared" />
 
+  <Import Project="..\..\shared\Panuon.WPF.Builder.Internal\Panuon.WPF.Builder.Internal.projitems" Label="Shared" />
+
   <ItemGroup>
     <Reference Include="Panuon.WPF">
       <HintPath>..\..\..\..\Panuon.WPF.Builder.UI\src\references\Panuon.WPF.dll</HintPath>

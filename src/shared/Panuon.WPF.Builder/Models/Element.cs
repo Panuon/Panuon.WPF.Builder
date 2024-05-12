@@ -10,21 +10,30 @@ namespace Panuon.WPF.Builder
         #region Fields
         private readonly Dictionary<Delegate, Delegate> _createdHandlers =
             new Dictionary<Delegate, Delegate>();
-        private IDictionary<string, object> _config;
         #endregion
 
         #region Ctor
-        public Element(IDictionary<string, object> config)
+        public Element(IAppBuilder appBuilder, 
+            IDictionary<string, object> config)
+            : base(appBuilder)
         {
-            _config = config;
+            foreach (var propertyValue in config)
+            {
+                if (propertyValue.Value != null)
+                {
+                    SetValue(propertyValue.Key.ToLower(), propertyValue.Value);
+                }
+            }
         }
         #endregion
 
         #region Properties
-        public abstract Type VisualType { get; }
+
         #endregion
 
-        #region Protected Methods
+        #region Methods
+
+        #region AddEventHandler
         public void AddEventHandler(string eventName,
             Delegate handler)
         {
@@ -32,7 +41,9 @@ namespace Panuon.WPF.Builder
             handler = CreateEventHandler(eventInfo.EventHandlerType, handler);
             eventInfo.AddEventHandler(Visual, handler);
         }
+        #endregion
 
+        #region RemoveEventHandler
         public void RemoveEventHandler(string eventName,
             Delegate handler)
         {
@@ -45,14 +56,18 @@ namespace Panuon.WPF.Builder
             }
             eventInfo.RemoveEventHandler(Visual, handler);
         }
+        #endregion
 
+        #region AddRoutedEventHandler
         public void AddRoutedEventHandler(RoutedEvent @event,
             Delegate handler)
         {
             handler = CreateEventHandler(@event.HandlerType, handler);
             Visual.AddHandler(@event, handler);
         }
+        #endregion
 
+        #region RemoveRoutedEventHandler
         public void RemoveRoutedEventHandler(RoutedEvent @event,
             Delegate handler)
         {
@@ -63,109 +78,100 @@ namespace Panuon.WPF.Builder
             }
             Visual.RemoveHandler(@event, handler);
         }
+        #endregion
 
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        #region SetValue
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch(propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "style":
-                    SetValue(FrameworkElement.StyleProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.StyleProperty, value);
+                    break;
                 case "visibility":
-                    SetValue(FrameworkElement.VisibilityProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.VisibilityProperty, value);
+                    break;
                 case "isenabled":
-                    SetValue(FrameworkElement.IsEnabledProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.IsEnabledProperty, value);
+                    break;
                 case "width":
-                    SetValue(FrameworkElement.WidthProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.WidthProperty, value);
+                    break;
                 case "height":
-                    SetValue(FrameworkElement.HeightProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.HeightProperty, value);
+                    break;
                 case "minwidth":
-                    SetValue(FrameworkElement.MinWidthProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.MinWidthProperty, value);
+                    break;
                 case "minheight":
-                    SetValue(FrameworkElement.MinHeightProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.MinHeightProperty, value);
+                    break;
                 case "maxwidth":
-                    SetValue(FrameworkElement.MaxWidthProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.MaxWidthProperty, value);
+                    break;
                 case "maxheight":
-                    SetValue(FrameworkElement.MaxHeightProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.MaxHeightProperty, value);
+                    break;
                 case "vertical":
-                    SetValue(FrameworkElement.VerticalAlignmentProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.VerticalAlignmentProperty, value);
+                    break;
                 case "horizontal":
-                    SetValue(FrameworkElement.HorizontalAlignmentProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.HorizontalAlignmentProperty, value);
+                    break;
                 case "margin":
-                    SetValue(FrameworkElement.MarginProperty, value, true);
-                    return true;
+                    SetValue(FrameworkElement.MarginProperty, value);
+                    break;
                 case "padding":
                     SetValue(Control.PaddingProperty, value);
-                    return true;
+                    break;
                 case "background":
                     SetValue(Control.BackgroundProperty, value);
-                    return true;
+                    break;
                 case "foreground":
                     SetValue(Control.ForegroundProperty, value);
-                    return true;
+                    break;
                 case "borderbrush":
                     SetValue(Control.BorderBrushProperty, value);
-                    return true;
+                    break;
                 case "borderthickness":
                     SetValue(Control.BorderThicknessProperty, value);
-                    return true;
+                    break;
                 case "fontsize":
                     SetValue(Control.FontSizeProperty, value);
-                    return true;
+                    break;
                 case "fontfamily":
                     SetValue(Control.FontFamilyProperty, value);
-                    return true;
+                    break;
                 case "fontstyle":
                     SetValue(Control.FontStyleProperty, value);
-                    return true;
+                    break;
                 case "fontweight":
                     SetValue(Control.FontWeightProperty, value);
-                    return true;
+                    break;
                 case "fontstretch":
                     SetValue(Control.FontStretchProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
+        #endregion
 
+        #region OnInitializing
+        protected override void OnInitializing()
+        {
+            base.OnInitializing();
+        }
+        #endregion
+
+        #region OnCreatingVisual
         protected override FrameworkElement OnCreatingVisual()
         {
             return (FrameworkElement)Activator.CreateInstance(VisualType);
         }
+        #endregion
 
-        protected override void OnInitializing()
-        {
-            base.OnInitializing();
-
-            foreach (var propertyValue in _config)
-            {
-                if (propertyValue.Value != null)
-                {
-                    SetPropertyValue(propertyValue.Key.ToLower(), propertyValue.Value);
-                }
-            }
-        }
-
-        protected object GetConfig(string key)
-        {
-            if (_config.ContainsKey(key))
-            {
-                return _config[key];
-            }
-            return null;
-        }
         #endregion
 
         #region Functions

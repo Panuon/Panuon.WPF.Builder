@@ -11,7 +11,6 @@ namespace Panuon.WPF.Builder
         public static IStackPanelElement CreateStackPanel(this IAppBuilder appBuilder,
             IEnumerable<IModule> children,
             object orientation = null,
-            bool canHorizontalScroll = false, bool canVerticalScroll = false,
             object visibility = null, object isEnabled = null,
             object width = null, object height = null,
             object minWidth = null, object minHeight = null,
@@ -23,7 +22,6 @@ namespace Panuon.WPF.Builder
                 appBuilder,
                 children,
                 orientation,
-                canHorizontalScroll, canVerticalScroll,
                 visibility, isEnabled,
                 width, height,
                 minWidth, minHeight,
@@ -31,7 +29,7 @@ namespace Panuon.WPF.Builder
                 margin, padding,
                 horizontal, vertical);
 
-            return new StackPanelElement(config);
+            return new StackPanelElement(appBuilder, config);
         }
         #endregion
     }

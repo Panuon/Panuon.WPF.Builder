@@ -1,6 +1,7 @@
 ﻿using Panuon.WPF.Builder.Elements;
 using Panuon.WPF.Builder.Utils;
 using System.Reflection;
+using System.Windows.Controls;
 
 namespace Panuon.WPF.Builder
 {
@@ -16,7 +17,6 @@ namespace Panuon.WPF.Builder
             object minWidth = null, object minHeight = null,
             object maxWidth = null, object maxHeight = null,
             object margin = null, object padding = null,
-            object horizontal = null, object vertical = null,
             object contentHorizontal = null, object contentVertical = null,
             object fontSize = null, object fontFamily = null, object fontWeight = null, object fontStyle = null, object fontStretch = null)
         {
@@ -31,10 +31,20 @@ namespace Panuon.WPF.Builder
                 minWidth, minHeight,
                 maxWidth, maxHeight,
                 margin, padding,
-                horizontal, vertical,
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
-            return new TextBlockElement(config);
+            return new TextBlockElement(appBuilder, config);
+        }
+
+        public static ITextBlockElement CustomStyle(this ITextBlockElement element,
+            object foreground = null)
+        {
+            if (foreground != null)
+            {
+                element.SetValue(TextBlock.ForegroundProperty, foreground);
+            }
+
+            return element;
         }
     }
 }

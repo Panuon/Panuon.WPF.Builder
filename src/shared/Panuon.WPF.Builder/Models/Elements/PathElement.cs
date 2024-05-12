@@ -8,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : DecoratorElement, IPathElement
     {
         #region Ctor
-        internal PathElement(IDictionary<string, object> config)
-            : base(config)
+        internal PathElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -26,18 +26,17 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Overrides
-
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "data":
                     SetValue(Path.DataProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
     }

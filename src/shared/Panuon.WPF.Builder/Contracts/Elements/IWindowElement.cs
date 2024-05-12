@@ -13,8 +13,6 @@ namespace Panuon.WPF.Builder
 
         void Close();
 
-        void SetOwner(object owner);
-
         IWindowElement OnClosing(CancelEventHandler handler);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Panuon.WPF.Builder.Elements;
+using Panuon.WPF.Builder.Internal.Converters;
 using Panuon.WPF.Builder.Utils;
 using System;
 using System.Collections.Generic;
@@ -148,25 +149,28 @@ namespace Panuon.WPF.Builder
         }
         #endregion
 
-        #region Binding
-        public Binding CreateBinding(string path
-            , string stringFormat = null
-            , IValueConverter converter = null)
+        #region CreateBinding
+
+        public Binding CreateBinding(string path,
+            string stringFormat = null,
+            IValueConverter converter = null,
+            Func<object, object> converteFunc = null)
         {
             return new Binding()
             {
                 Path = new PropertyPath(path),
                 StringFormat = stringFormat,
-                Converter = converter,
+                Converter = converter ?? (converteFunc == null ? null : new CustomConverter(converteFunc)),
             };
         }
 
-        public Binding CreateBinding(DependencyProperty property
-            , object source
-            , string stringFormat = null
-            , IValueConverter converter = null
-            , BindingMode mode = BindingMode.Default
-            , UpdateSourceTrigger trigger = UpdateSourceTrigger.Default)
+        public Binding CreateBinding(DependencyProperty property,
+            object source,
+            string stringFormat = null,
+            IValueConverter converter = null,
+            Func<object, object> converteFunc = null,
+            BindingMode mode = BindingMode.Default,
+            UpdateSourceTrigger trigger = UpdateSourceTrigger.Default)
         {
             return new Binding()
             {
@@ -175,16 +179,17 @@ namespace Panuon.WPF.Builder
                 Mode = mode,
                 UpdateSourceTrigger = trigger,
                 StringFormat = stringFormat,
-                Converter = converter,
+                Converter = converter ?? (converteFunc == null ? null : new CustomConverter(converteFunc)),
             };
         }
 
-        public Binding CreateBinding(DependencyProperty property
-            , RelativeSource relativeSource
-            , string stringFormat = null
-            , IValueConverter converter = null
-            , BindingMode mode = BindingMode.Default
-            , UpdateSourceTrigger trigger = UpdateSourceTrigger.Default)
+        public Binding CreateBinding(DependencyProperty property,
+            RelativeSource relativeSource,
+            string stringFormat = null,
+            IValueConverter converter = null,
+            Func<object, object> converteFunc = null,
+            BindingMode mode = BindingMode.Default,
+            UpdateSourceTrigger trigger = UpdateSourceTrigger.Default)
         {
             return new Binding()
             {
@@ -193,7 +198,7 @@ namespace Panuon.WPF.Builder
                 Mode = mode,
                 UpdateSourceTrigger = trigger,
                 StringFormat = stringFormat,
-                Converter = converter,
+                Converter = converter ?? (converteFunc == null ? null : new CustomConverter(converteFunc)),
             };
         }
         #endregion
@@ -217,7 +222,7 @@ namespace Panuon.WPF.Builder
             {
                 if (owner != null)
                 {
-                    windowElement.SetOwner(owner);
+                    windowElement.Set(nameof(owner), owner);
                 }
                 if (title != null)
                 {
@@ -241,7 +246,7 @@ namespace Panuon.WPF.Builder
                 }
                 if (location != null)
                 {
-                    windowElement.Set(nameof(WindowStartupLocation), location);
+                    windowElement.Set(nameof(location), location);
                 }
                 windowElement.Show();
             }
@@ -256,7 +261,7 @@ namespace Panuon.WPF.Builder
                     location
                     );
 
-                windowElement = new WindowElement(null, config);
+                windowElement = new WindowElement(this, config);
                 windowElement.Show();
             }
         }
@@ -280,7 +285,7 @@ namespace Panuon.WPF.Builder
             {
                 if (owner != null)
                 {
-                    windowElement.SetOwner(owner);
+                    windowElement.Set(nameof(owner), owner);
                 }
                 if (title != null)
                 {
@@ -304,7 +309,11 @@ namespace Panuon.WPF.Builder
                 }
                 if (location != null)
                 {
-                    windowElement.Set(nameof(WindowStartupLocation), location);
+                    windowElement.Set(nameof(location), location);
+                }
+                else if(owner != null)
+                {
+                    windowElement.Set(nameof(location), WindowStartupLocation.CenterOwner);
                 }
                 return windowElement.ShowDialog();
             }
@@ -318,9 +327,16 @@ namespace Panuon.WPF.Builder
                     width, height,
                     location
                     );
-                windowElement = new WindowElement(null, config);
+                windowElement = new WindowElement(this, config);
                 return windowElement.ShowDialog();
             }
+        }
+        #endregion
+
+        #region FindResource
+        public object FindResource(object key)
+        {
+            return Application.Current.FindResource(key);
         }
         #endregion
 

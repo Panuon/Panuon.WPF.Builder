@@ -30,7 +30,7 @@ namespace Panuon.WPF.Builder
                 horizontal, vertical,
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
-            return new ControlElement<TElement>(config);
+            return new ControlElement<TElement>(appBuilder,config);
         }
     }
 }

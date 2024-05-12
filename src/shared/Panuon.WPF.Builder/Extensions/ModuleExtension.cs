@@ -7,21 +7,19 @@ namespace Panuon.WPF.Builder
     {
         public static TModule Set<TModule>(this TModule module,
             string propertyNameOrKey,
-            object value,
-            bool updateActualVisual = false)
+            object value)
             where TModule : IModule
         {
-            module.SetValue(propertyNameOrKey, value, updateActualVisual);
+            module.SetValue(propertyNameOrKey, value);
             return module;
         }
 
         public static TModule Set<TModule>(this TModule module,
             DependencyProperty property,
-            object value,
-            bool updateActualVisual = false)
+            object value)
             where TModule : IModule
         {
-            module.SetValue(property, value, updateActualVisual);
+            module.SetValue(property, value);
             return module;
         }
 
@@ -49,21 +47,69 @@ namespace Panuon.WPF.Builder
             return module;
         }
 
-        public static TModule SetHorizontal<TModule>(this TModule module,
-            object horizontal)
-            where TModule : IModule
+        public static TModule SetMargin<TModule>(this TModule module,
+           double left,
+           double top,
+           double right,
+           double bottom)
+           where TModule : IModule
         {
-            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, horizontal);
+            module.SetValue(FrameworkElement.MarginProperty, new Thickness(left, top, right, bottom));
             return module;
         }
 
-        public static TModule SetVertical<TModule>(this TModule module,
-            object vertical)
+        #region Align
+        public static TModule AlignLeft<TModule>(this TModule module)
             where TModule : IModule
         {
-            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, vertical);
+            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Left);
             return module;
         }
+
+        public static TModule AlignRight<TModule>(this TModule module,
+            object horizontal)
+            where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Right);
+            return module;
+        }
+
+        public static TModule AlignTop<TModule>(this TModule module)
+            where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Top);
+            return module;
+        }
+
+        public static TModule AlignBottom<TModule>(this TModule module)
+           where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Bottom);
+            return module;
+        }
+
+        public static TModule AlignCenter<TModule>(this TModule module)
+           where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            module.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
+            return module;
+        }
+
+        public static TModule HorizontalAlignCenter<TModule>(this TModule module)
+           where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            return module;
+        }
+
+        public static TModule VerticalAlignCenter<TModule>(this TModule module)
+          where TModule : IModule
+        {
+            module.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
+            return module;
+        }
+        #endregion
 
         public static TModule SetGridRow<TModule>(this TModule module,
             object row)

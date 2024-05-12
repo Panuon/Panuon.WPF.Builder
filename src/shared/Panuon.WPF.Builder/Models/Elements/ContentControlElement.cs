@@ -8,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : Element, IContentControlElement
     {
         #region Ctor
-        internal ContentControlElement(IDictionary<string, object> config)
-            : base(config)
+        internal ContentControlElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -20,14 +20,7 @@ namespace Panuon.WPF.Builder.Elements
             get => GetValue(ContentControl.ContentProperty);
             set
             {
-                if (value is Module module)
-                {
-                    SetValue(ContentControl.ContentProperty, module.ActualVisual);
-                }
-                else
-                {
-                    SetValue(ContentControl.ContentProperty, value);
-                }
+                SetValue(ContentControl.ContentProperty, value);
             }
         }
 
@@ -35,27 +28,20 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Overrids
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "content":
-                    if (value is Module module)
-                    {
-                        SetValue(ContentControl.ContentProperty, module.ActualVisual);
-                    }
-                    else
-                    {
-                        SetValue(ContentControl.ContentProperty, value);
-                    }
-                    return true;
+                    SetValue(ContentControl.ContentProperty, value);
+                    break;
                 case "contenttemplate":
                     SetValue(ContentControl.ContentTemplateProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
     }

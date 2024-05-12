@@ -8,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : Element, IDecoratorElement
     {
         #region Ctor
-        internal DecoratorElement(IDictionary<string, object> config)
-            : base(config)
+        internal DecoratorElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -17,7 +17,11 @@ namespace Panuon.WPF.Builder.Elements
         public IModule Child
         {
             get => _child;
-            set { _child = value; (Visual as Decorator).Child = value.ActualVisual; }
+            set
+            {
+                _child = value;
+                _visualBuilder.AddChild(value);
+            }
         }
         private IModule _child;
 

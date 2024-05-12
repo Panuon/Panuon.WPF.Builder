@@ -4,18 +4,19 @@ using System.Windows.Controls;
 
 namespace Panuon.WPF.Builder.Elements
 {
-    internal class ListBoxElement
-        : SelectorElement, IListBoxElement
+    internal class ComboBoxElement
+        : SelectorElement, IComboBoxElement
     {
         #region Ctor
-        internal ListBoxElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+        internal ComboBoxElement(IAppBuilder appBuilder,
+            IDictionary<string, object> config)
             : base(appBuilder, config)
         {
         }
         #endregion
 
         #region Properties
-        public override Type VisualType => typeof(ListBox);
+        public override Type VisualType => typeof(ComboBox);
         #endregion
 
         #region Overrids
@@ -26,9 +27,9 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Methods
-        public new IListBoxElement OnSelectionChanged(SelectionChangedEventHandler handler)
+        public new IComboBoxElement OnSelectionChanged(SelectionChangedEventHandler handler)
         {
-            return (IListBoxElement)base.OnSelectionChanged(handler);
+            return (IComboBoxElement)base.OnSelectionChanged(handler);
         }
         #endregion
     }

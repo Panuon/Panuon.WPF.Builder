@@ -8,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : DecoratorElement, IBorderElement
     {
         #region Ctor
-        internal BorderElement(IDictionary<string, object> config)
-            : base(config)
+        internal BorderElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion

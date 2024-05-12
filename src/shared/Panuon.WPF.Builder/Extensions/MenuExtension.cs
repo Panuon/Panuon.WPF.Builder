@@ -41,7 +41,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new MenuElement(config);
+            return new MenuElement(appBuilder, config);
         }
     }
 }

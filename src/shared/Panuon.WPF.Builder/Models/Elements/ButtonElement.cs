@@ -9,8 +9,8 @@ namespace Panuon.WPF.Builder.Elements
         : ContentControlElement, IButtonElement
     {
         #region Ctor
-        internal ButtonElement(IDictionary<string, object> config)
-            : base(config)
+        internal ButtonElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,8 +9,8 @@ namespace Panuon.WPF.Builder.Elements
         : PanelElement, IGridElement
     {
         #region Ctor
-        internal GridElement(IDictionary<string, object> config)
-            : base(config)
+        internal GridElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -27,7 +26,7 @@ namespace Panuon.WPF.Builder.Elements
 
         public static void SetRow(IModule module, object value)
         {
-            module.SetValue(Grid.RowProperty, value, true);
+            module.SetValue(Grid.RowProperty, value);
         }
         #endregion
 
@@ -39,7 +38,7 @@ namespace Panuon.WPF.Builder.Elements
 
         public static void SetRowSpan(IModule module, object value)
         {
-            module.SetValue(Grid.RowSpanProperty, value, true);
+            module.SetValue(Grid.RowSpanProperty, value);
         }
         #endregion
 
@@ -51,7 +50,7 @@ namespace Panuon.WPF.Builder.Elements
 
         public static void SetColumn(IModule module, object value)
         {
-            module.SetValue(Grid.ColumnProperty, value, true);
+            module.SetValue(Grid.ColumnProperty, value);
         }
         #endregion
 
@@ -63,76 +62,55 @@ namespace Panuon.WPF.Builder.Elements
 
         public static void SetColumnSpan(IModule module, object value)
         {
-            module.SetValue(Grid.ColumnSpanProperty, value, true);
+            module.SetValue(Grid.ColumnSpanProperty, value);
         }
         #endregion
 
         #endregion
 
         #region Methods
-        protected override FrameworkElement OnCreatingActualVisual(FrameworkElement element)
-        { 
-            return new Border()
-            {
-                Child = element,
-            };
-        }
         #endregion
 
         #region Overrides
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
             var grid = Visual as Grid;
-
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "rows":
                     var rows = SerializeValue<IEnumerable<GridLength>>(value);
+                    foreach (var row in rows)
+                    {
+                        var rowDefinition = new FrameworkElementFactory(typeof(RowDefinition));
+                        rowDefinition.SetValue(RowDefinition.HeightProperty, row);
+                        _visualBuilder.AddChild(rowDefinition);
+                    }
+
                     grid.RowDefinitions.Clear();
                     foreach (var row in rows)
                     {
                         grid.RowDefinitions.Add(new RowDefinition() { Height = row });
                     }
-                    return true;
+                    break;
                 case "columns":
                     var columns = SerializeValue<IEnumerable<GridLength>>(value);
+                    foreach (var column in columns)
+                    {
+                        var columnDefinition = new FrameworkElementFactory(typeof(ColumnDefinition));
+                        columnDefinition.SetValue(ColumnDefinition.WidthProperty, column);
+                        _visualBuilder.AddChild(columnDefinition);
+                    }
+
                     grid.ColumnDefinitions.Clear();
                     foreach (var column in columns)
                     {
                         grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = column });
                     }
-                    return true;
-                case "autoallocate":
-                    var autoAllocate = SerializeValue<bool>(value);
-                    if (autoAllocate
-                        && Children != null
-                        && ((grid.RowDefinitions.Any() && !grid.ColumnDefinitions.Any()) || (!grid.RowDefinitions.Any() && grid.ColumnDefinitions.Any())))
-                    {
-                        var index = 0;
-                        foreach (Module child in Children)
-                        {
-                            if (grid.RowDefinitions.Any())
-                            {
-                                if (!child._presetPropertyValues.ContainsKey(Grid.RowProperty))
-                                {
-                                    child.SetValue(Grid.RowProperty, index);
-                                }
-                            }
-                            else if (grid.ColumnDefinitions.Any())
-                            {
-                                if (!child._presetPropertyValues.ContainsKey(Grid.ColumnProperty))
-                                {
-                                    child.SetValue(Grid.ColumnProperty, index);
-                                }
-                            }
-                            index++;
-                        }
-                    }
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
 

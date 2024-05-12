@@ -11,9 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Compositions\AppBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IBorderElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IComboBoxElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IRadioButtonElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IMenuElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IPasswordBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IScrollViewerElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IShapeElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)contracts\elements\IPathElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\ICheckBoxElement.cs" />
@@ -38,12 +40,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IContainerElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\IView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Elements\IWindowElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\BorderExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ComboBoxExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ScrollViewerExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\RadioButtonExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ListBoxExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\MenuExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\PasswordBoxExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\PathExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\CheckBoxExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ComboBoxElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Elements\ScrollViewerElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ToggleButtonExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextBoxExtension.cs" />

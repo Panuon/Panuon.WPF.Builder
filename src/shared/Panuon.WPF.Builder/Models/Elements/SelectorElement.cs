@@ -9,8 +9,8 @@ namespace Panuon.WPF.Builder
         : ItemsControlElement, ISelectorElement
     {
         #region Ctor
-        internal SelectorElement(IDictionary<string, object> config)
-            : base(config)
+        internal SelectorElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion
@@ -45,26 +45,26 @@ namespace Panuon.WPF.Builder
             return this;
         }
 
-        protected override bool SetPropertyValue(string propertyKey,
-            object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "selectedvaluepath":
                     SetValue(Selector.SelectedValuePathProperty, value);
-                    return true;
+                    break;
                 case "selectedindex":
                     SetValue(Selector.SelectedIndexProperty, value);
-                    return true;
+                    break;
                 case "selecteditem":
                     SetValue(Selector.SelectedItemProperty, value);
-                    return true;
+                    break;
                 case "selectedvalue":
                     SetValue(Selector.SelectedValueProperty, value);
-                    return true;
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
     }

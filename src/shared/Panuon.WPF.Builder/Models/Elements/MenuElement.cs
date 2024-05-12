@@ -10,8 +10,8 @@ namespace Panuon.WPF.Builder.Elements
         : ItemsControlElement, IMenuElement
     {
         #region Ctor
-        internal MenuElement(IDictionary<string, object> config)
-            : base(config)
+        internal MenuElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
         #endregion

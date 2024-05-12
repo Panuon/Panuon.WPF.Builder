@@ -13,8 +13,8 @@ namespace Panuon.WPF.Builder
         #endregion
 
         #region Ctor
-        internal TabControlElement(IDictionary<string, object> config)
-            : base(config)
+        internal TabControlElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
         }
 
@@ -29,7 +29,7 @@ namespace Panuon.WPF.Builder
             object content)
         {
             content = content is IModule module
-                    ? module.ActualVisual
+                    ? module.Visual
                     : content;
             if (IsInitalized)
             {

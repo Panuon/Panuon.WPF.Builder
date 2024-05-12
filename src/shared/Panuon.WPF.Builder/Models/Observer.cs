@@ -21,9 +21,54 @@ namespace Panuon.WPF.Builder
 
         }
 
-        internal Observer(object value)
+        internal Observer(object defaultValue)
         {
-            Value = value;
+            Value = defaultValue;
+        }
+
+        public Observer(Type valueType,
+            object defaultValue)
+            : this(defaultValue)
+        {
+            ValueType = valueType;
+        }
+
+        public Observer(Type valueType, 
+            Func<object> onSourceUpdated,
+            Observer source)
+            : this(valueType, defaultValue: GetDefaultValue(valueType))
+        {
+            if (source == null)
+            {
+                throw new NullReferenceException("Parameter source can not be null.");
+            }
+            source.AddReference(this, onSourceUpdated, false);
+            source.InvokeReferences(this);
+        }
+
+        public Observer(Type valueType, 
+            Func<object> onSourceUpdated,
+            Func<object> onUpdateSource,
+            Observer source)
+            : this(valueType, onSourceUpdated, source)
+        {
+            AddReference(source, onUpdateSource, true);
+        }
+
+        public Observer(Type valueType, 
+            Func<Observer, object> onSourceUpdated,
+            params Observer[] sources)
+            : this(valueType, defaultValue: GetDefaultValue(valueType))
+        {
+            if (sources == null)
+            {
+                throw new NullReferenceException("Parameter sources can not be null.");
+            }
+            foreach (var source in sources)
+            {
+                source.AddReference(this, onSourceUpdated, false);
+                source.InvokeReferences(this);
+            }
         }
         #endregion
 
@@ -121,6 +166,17 @@ namespace Panuon.WPF.Builder
             {
                 InvokeReferences();
             }
+        }
+        #endregion
+
+        #region Functions
+        private static object GetDefaultValue(Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
         }
         #endregion
     }

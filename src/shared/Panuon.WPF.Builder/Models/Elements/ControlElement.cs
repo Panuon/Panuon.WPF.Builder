@@ -8,8 +8,8 @@ namespace Panuon.WPF.Builder.Elements
         : Element, IControlElement
         where TElement : FrameworkElement
     {
-        internal ControlElement(IDictionary<string, object> config)
-            : base(config)
+        internal ControlElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
 
         }

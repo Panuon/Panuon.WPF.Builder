@@ -31,7 +31,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new LabelElement(config);
+            return new LabelElement(appBuilder, config);
         }
     }
 }

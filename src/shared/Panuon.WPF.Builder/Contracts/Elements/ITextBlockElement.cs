@@ -5,9 +5,8 @@
     {
         string Text { get; set; }
 
-        ITextBlockElement CustomStyle(object foreground = null);
-
         ITextBlockElement AddRun(object text = null,
+            object toolTip = null,
             object foreground = null);
     }
 }

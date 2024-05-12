@@ -4,11 +4,11 @@ using System.Windows.Controls;
 
 namespace Panuon.WPF.Builder.Elements
 {
-    internal class LabelElement
-        : ContentControlElement, ILabelElement
+    internal class ScrollViewerElement
+        : ContentControlElement, IScrollViewerElement
     {
         #region Ctor
-        internal LabelElement(IAppBuilder appBuilder, 
+        internal ScrollViewerElement(IAppBuilder appBuilder,
             IDictionary<string, object> config)
             : base(appBuilder, config)
         {
@@ -16,7 +16,7 @@ namespace Panuon.WPF.Builder.Elements
         #endregion
 
         #region Properties
-        public override Type VisualType => typeof(Label);
+        public override Type VisualType => typeof(ScrollViewer);
         #endregion
 
         #region Methods

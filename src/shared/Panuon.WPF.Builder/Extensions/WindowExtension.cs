@@ -10,7 +10,6 @@ namespace Panuon.WPF.Builder
         public static IWindowElement CreateWindow(this IAppBuilder appBuilder,
             object content= null,
             object owner = null,
-            Type type = null,
             object title = null,
             object icon = null,
             object style = null,
@@ -21,14 +20,14 @@ namespace Panuon.WPF.Builder
             var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
                 appBuilder,
                 content,
-                owner, type,
+                owner,
                 title, icon, 
                 style,
                 width, height,
                 location
                 );
 
-            return new WindowElement(type, config);
+            return new WindowElement(appBuilder, config);
         }
     }
 }

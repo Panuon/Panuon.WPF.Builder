@@ -9,20 +9,17 @@ namespace Panuon.WPF.Builder.Elements
         : ContentControlElement, IWindowElement
     {
         #region Fields
-        private Type _windowType;
         #endregion
 
         #region Ctor
-        internal WindowElement(Type windowType,
-            IDictionary<string, object> config)
-            : base(config)
+        internal WindowElement(IAppBuilder appBuilder, IDictionary<string, object> config)
+            : base(appBuilder, config)
         {
-            _windowType = windowType ?? typeof(Window);
         }
         #endregion
 
         #region Properties
-        public override Type VisualType => _windowType;
+        public override Type VisualType => typeof(Window);
         #endregion
 
         #region Internal Properties
@@ -34,7 +31,7 @@ namespace Panuon.WPF.Builder.Elements
         {
             WindowVisual.Close();
         }
-        
+
         public void Hide()
         {
             WindowVisual.Hide();
@@ -55,48 +52,44 @@ namespace Panuon.WPF.Builder.Elements
             AddEventHandler(nameof(WindowVisual.Closing), handler);
             return this;
         }
-
-        public void SetOwner(object owner)
-        {
-            if (owner is Window ownerWindow)
-            {
-                WindowVisual.Owner = ownerWindow;
-            }
-            else if (owner is FrameworkElement ownerElement)
-            {
-                WindowVisual.Owner = Window.GetWindow(ownerElement);
-            }
-            else if (owner is IModule ownerModule)
-            {
-                if (ownerModule.ActualVisual is Window ownerWindowModule)
-                {
-                    WindowVisual.Owner = ownerWindowModule;
-                }
-                else if (ownerModule.ActualVisual is FrameworkElement ownerElementModule)
-                {
-                    WindowVisual.Owner = Window.GetWindow(ownerElementModule);
-                }
-            }
-        }
         #endregion
 
         #region Overrides
-        protected override bool SetPropertyValue(string propertyKey, object value)
+        public override void SetValue(string propertyNameOrKey, object value)
         {
-            switch (propertyKey)
+            switch (propertyNameOrKey)
             {
                 case "owner":
-                    SetOwner(value);
-                    return true;
-                case "title":
-                    SetValue(Window.TitleProperty, value);
-                    return true;
+                    if (value is Window ownerWindow)
+                    {
+                        WindowVisual.Owner = ownerWindow;
+                    }
+                    else if (value is FrameworkElement ownerElement)
+                    {
+                        WindowVisual.Owner = Window.GetWindow(ownerElement);
+                    }
+                    else if (value is IModule ownerModule)
+                    {
+                        if (ownerModule.Visual is Window ownerWindowModule)
+                        {
+                            WindowVisual.Owner = ownerWindowModule;
+                        }
+                        else if (ownerModule.Visual is FrameworkElement ownerElementModule)
+                        {
+                            WindowVisual.Owner = Window.GetWindow(ownerElementModule);
+                        }
+                    }
+                    break;
                 case "location":
                     WindowVisual.WindowStartupLocation = SerializeValue<WindowStartupLocation>(value);
-                    return true;
+                    break;
+                case "title":
+                    SetValue(Window.TitleProperty, value);
+                    break;
+                default:
+                    base.SetValue(propertyNameOrKey, value);
+                    break;
             }
-
-            return base.SetPropertyValue(propertyKey, value);
         }
         #endregion
     }

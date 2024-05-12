@@ -36,7 +36,7 @@ namespace Panuon.WPF.Builder
                 contentHorizontal, contentVertical,
                 fontSize, fontFamily, fontWeight, fontStyle, fontStretch);
 
-            return new RadioButtonElement(config);
+            return new RadioButtonElement(appBuilder, config);
         }
 
 

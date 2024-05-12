@@ -9,34 +9,30 @@ namespace Panuon.WPF.Builder
     {
         #region Methods
         public static IGridElement CreateGrid(this IAppBuilder appBuilder,
-            IEnumerable<IModule> children,
+            IEnumerable<IModule> children = null,
             IEnumerable<object> rows = null,
             IEnumerable<object> columns = null,
-            bool autoAllocate = true,
-            object width = null,
-            object height = null,
-            object horizontal = null,
-            object vertical = null,
-            object background = null,
-            object borderBrush = null,
-            object borderThickness = null,
-            object margin = null,
-            object padding = null,
-            object horizontalSeparatorBrush = null,
-            object verticalSeparatorBrush = null)
+            object visibility = null,
+            object width = null, object height = null,
+            object minWidth = null, object minHeight = null,
+            object maxWidth = null, object maxHeight = null,
+            object margin = null, object padding = null,
+            object horizontal = null, object vertical = null,
+            object horizontalSeparatorBrush = null, object verticalSeparatorBrush = null)
         {
             var config = ParameterUtil.GetParameters(MethodBase.GetCurrentMethod(),
                 appBuilder,
                 children,
                 rows, columns,
-                autoAllocate,
+                visibility,
                 width, height,
-                vertical, horizontal,
-                background, borderBrush, borderThickness, 
+                minWidth, minHeight,
+                maxWidth, maxHeight,
                 margin, padding,
+                horizontal, vertical,
                 horizontalSeparatorBrush, verticalSeparatorBrush);
 
-            return new GridElement(config);
+            return new GridElement(appBuilder, config);
         }
         #endregion
     }
